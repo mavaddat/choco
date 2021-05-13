@@ -1,4 +1,4 @@
-﻿# Copyright © 2017 Chocolatey Software, Inc.
+﻿# Copyright © 2017 - 2021 Chocolatey Software, Inc.
 # Copyright © 2015 - 2017 RealDimensions Software, LLC
 # Copyright © 2011 - 2015 RealDimensions Software, LLC & original authors/contributors from https://github.com/chocolatey/chocolatey
 #
@@ -68,10 +68,11 @@ This is a directory where you would like the unzipped files to end up.
 If it does not exist, it will be created.
 
 .PARAMETER SpecificFolder
-OPTIONAL - This is a specific directory within zip file to extract.
+OPTIONAL - This is a specific directory within zip file to extract. The
+folder and its contents will be extracted to the destination.
 
 .PARAMETER PackageName
-OPTIONAL - This will faciliate logging unzip activity for subsequent
+OPTIONAL - This will facilitate logging unzip activity for subsequent
 uninstalls
 
 .PARAMETER IgnoredArguments
@@ -88,7 +89,7 @@ Install-ChocolateyZipPackage
 #>
 param(
   [alias("file")][parameter(Mandatory=$false, Position=0)][string] $fileFullPath,
-  [parameter(Mandatory=$true, Position=1)][string] $destination,
+  [alias("unzipLocation")][parameter(Mandatory=$true, Position=1)][string] $destination,
   [parameter(Mandatory=$false, Position=2)][string] $specificFolder,
   [parameter(Mandatory=$false, Position=3)][string] $packageName,
   [alias("file64")][parameter(Mandatory=$false)][string] $fileFullPath64,

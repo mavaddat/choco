@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ namespace chocolatey.infrastructure.app.commands
     using services;
     using templates;
 
-    [CommandFor("new", "generates files necessary for a chocolatey package from a template")]
+    [CommandFor("new", "creates template files for creating a new Chocolatey package")]
     public class ChocolateyNewCommand : ICommand
     {
         private readonly ITemplateService _templateService;

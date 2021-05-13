@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ namespace chocolatey.infrastructure.app.commands
     using logging;
     using services;
 
-    [CommandFor("pack", "packages up a nuspec to a compiled nupkg")]
+    [CommandFor("pack", "packages nuspec, scripts, and other Chocolatey package resources into a nupkg file")]
     public class ChocolateyPackCommand : ICommand
     {
         private readonly IChocolateyPackageService _packageService;

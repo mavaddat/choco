@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ namespace chocolatey.infrastructure.app.commands
     using logging;
     using services;
 
-    [CommandFor("outdated", "retrieves packages that are outdated. Similar to upgrade all --noop")]
+    [CommandFor("outdated", "retrieves information about packages that are outdated. Similar to upgrade all --noop")]
     public class ChocolateyOutdatedCommand : ICommand
     {
         private readonly IChocolateyPackageService _packageService;

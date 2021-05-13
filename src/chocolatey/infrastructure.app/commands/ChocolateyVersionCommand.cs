@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -84,7 +84,7 @@ DEPRECATION NOTICE - `choco version -lo` is deprecated. version command
             {
                 this.Log().Warn(ChocolateyLoggers.Important, @"
 DEPRECATION NOTICE - choco version command is deprecated and will be 
- removed in version 1.0.0. Please use `choco upgrade pkgname --noop` 
+ removed in version 1.0.0. Please use `choco outdated` 
  instead.");
 
             }

@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ namespace chocolatey.infrastructure.app.commands
     using resources;
 #endif
 
-    [CommandFor("unpackself", "have chocolatey set itself up")]
+    [CommandFor("unpackself", "re-installs Chocolatey base files")]
     public class ChocolateyUnpackSelfCommand : ICommand
     {
         private readonly IFileSystem _fileSystem;

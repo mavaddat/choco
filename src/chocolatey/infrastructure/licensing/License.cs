@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2019 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -64,7 +64,7 @@ namespace chocolatey.infrastructure.licensing
  as is and be successful. You need to download nupkgs from the links in
  the trial email as your license will not be registered on the licensed
  repository. Please reference
- https://chocolatey.org/docs/installation-licensed#how-do-i-install-the-trial-edition
+ https://docs.chocolatey.org/en-us/licensed-extension/setup#how-do-i-install-the-trial-edition
  for specific instructions.");
                 }
             }

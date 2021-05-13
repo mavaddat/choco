@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -287,14 +287,7 @@ namespace chocolatey.infrastructure.app.services
             // Initialize the property provider based on what was passed in using the properties flag
             var propertyProvider = new DictionaryPropertyProvider(properties);
 
-            var basePath = nuspecDirectory;
-            if (config.Information.PlatformType != PlatformType.Windows)
-            {
-                //bug with nuspec and tools/** folder location on Windows.
-                basePath = "./";
-            }
-
-            var builder = new PackageBuilder(nuspecFilePath, basePath, propertyProvider, includeEmptyDirectories: true);
+            var builder = new PackageBuilder(nuspecFilePath, nuspecDirectory, propertyProvider, includeEmptyDirectories: true);
             if (!string.IsNullOrWhiteSpace(config.Version))
             {
                 builder.Version = new SemanticVersion(config.Version);
@@ -348,7 +341,7 @@ to the email and ask for status or use contact site admins on the
 package page to contact moderators.
 
 Please ensure your registered email address is correct and emails from
-noreply at chocolatey dot org are not being sent to your spam/junk 
+noreply at chocolatey dot org are not being sent to your spam/junk
 folder.");
             }
         }
@@ -435,7 +428,7 @@ folder.");
                 uninstallSuccessAction: null,
                 addUninstallHandler: true);
 
-            var originalConfig = config;
+            var originalConfig = config.deep_copy();
 
             foreach (string packageName in packageNames.or_empty_list_if_null())
             {
@@ -457,14 +450,14 @@ folder.");
 
                 if (installedPackage != null && (version == null || version == installedPackage.Version) && config.Force)
                 {
-                    this.Log().Warn(ChocolateyLoggers.Important, () => @"{0} v{1} already installed. Forcing reinstall of version '{1}'. 
+                    this.Log().Warn(ChocolateyLoggers.Important, () => @"{0} v{1} already installed. Forcing reinstall of version '{1}'.
  Please use upgrade if you meant to upgrade to a new version.".format_with(installedPackage.Id, installedPackage.Version));
                     version = installedPackage.Version;
                 }
 
                 if (installedPackage != null && version != null && version < installedPackage.Version && !config.AllowMultipleVersions && !config.AllowDowngrade)
                 {
-                    string logMessage = "A newer version of {0} (v{1}) is already installed.{2} Use --allow-downgrade or --force to attempt to install older versions, or use side by side to allow multiple versions.".format_with(installedPackage.Id, installedPackage.Version, Environment.NewLine);
+                    string logMessage = "A newer version of {0} (v{1}) is already installed.{2} Use --allow-downgrade or --force to attempt to install older versions, or use --side-by-side to allow multiple versions.".format_with(installedPackage.Id, installedPackage.Version, Environment.NewLine);
                     var nullResult = packageInstalls.GetOrAdd(packageName, new PackageResult(installedPackage, _fileSystem.combine_paths(ApplicationParameters.PackagesLocation, installedPackage.Id)));
                     nullResult.Messages.Add(new ResultMessage(ResultType.Error, logMessage));
                     this.Log().Error(ChocolateyLoggers.Important, logMessage);
@@ -481,10 +474,10 @@ folder.");
 If the package version is a prerelease and you didn't specify `--pre`,
  the package may not be found.{2}{3}".format_with(packageName, config.Sources, string.IsNullOrWhiteSpace(config.Version) ? String.Empty :
 @"
-Version was specified as '{0}'. It is possible that version 
+Version was specified as '{0}'. It is possible that version
  does not exist for '{1}' at the source specified.".format_with(config.Version.to_string(), packageName),
 @"
-Please see https://chocolatey.org/docs/troubleshooting for more 
+Please see https://docs.chocolatey.org/en-us/troubleshooting for more
  assistance.");
                     this.Log().Error(ChocolateyLoggers.Important, logMessage);
                     var noPkgResult = packageInstalls.GetOrAdd(packageName, new PackageResult(packageName, version.to_string(), null));
@@ -614,7 +607,7 @@ Please see https://chocolatey.org/docs/troubleshooting for more
             set_package_names_if_all_is_specified(config, () => { config.IgnoreDependencies = true; });
             config.IgnoreDependencies = configIgnoreDependencies;
 
-            var originalConfig = config;
+            var originalConfig = config.deep_copy();
 
             foreach (string packageName in config.PackageNames.Split(new[] { ApplicationParameters.PackageNamesSeparator }, StringSplitOptions.RemoveEmptyEntries).or_empty_list_if_null())
             {
@@ -890,7 +883,7 @@ Please see https://chocolatey.org/docs/troubleshooting for more
             set_package_names_if_all_is_specified(config, () => { config.IgnoreDependencies = true; });
             var packageNames = config.PackageNames.Split(new[] { ApplicationParameters.PackageNamesSeparator }, StringSplitOptions.RemoveEmptyEntries).or_empty_list_if_null().ToList();
 
-            var originalConfig = config;
+            var originalConfig = config.deep_copy();
 
             foreach (var packageName in packageNames)
             {
@@ -1088,9 +1081,9 @@ Please see https://chocolatey.org/docs/troubleshooting for more
                 if (errored)
                 {
                     this.Log().Warn(ChocolateyLoggers.Important,
-                                    @"There was an error accessing files. This could mean there is a 
- process locking the folder or files. Please make sure nothing is 
- running that would lock the files or folders in this directory prior 
+                                    @"There was an error accessing files. This could mean there is a
+ process locking the folder or files. Please make sure nothing is
+ running that would lock the files or folders in this directory prior
  to upgrade. If the package fails to upgrade, this is likely the cause.");
                 }
             }
@@ -1321,8 +1314,8 @@ Please see https://chocolatey.org/docs/troubleshooting for more
                                 : "{0}.commandline".format_with(packageName);
 
                         var timeoutInSeconds = config.PromptForConfirmation ? 0 : 20;
-                        this.Log().Warn(@"You are uninstalling {0}, which is likely a metapackage for an 
- *.install/*.portable package that it installed 
+                        this.Log().Warn(@"You are uninstalling {0}, which is likely a metapackage for an
+ *.install/*.portable package that it installed
  ({0} represents discoverability).".format_with(packageName));
                         var selection = InteractivePrompt.prompt_for_confirmation(
                             "Would you like to uninstall {0} as well?".format_with(actualPackageName),
@@ -1357,7 +1350,7 @@ Please see https://chocolatey.org/docs/troubleshooting for more
                     config.ForceDependencies = false;
                 });
 
-            var originalConfig = config;
+            var originalConfig = config.deep_copy();
 
             foreach (string packageName in config.PackageNames.Split(new[] { ApplicationParameters.PackageNamesSeparator }, StringSplitOptions.RemoveEmptyEntries).or_empty_list_if_null())
             {
@@ -1551,7 +1544,7 @@ Please see https://chocolatey.org/docs/troubleshooting for more
             }
         }
 
-        private IEnumerable<PackageResult> get_all_installed_packages(ChocolateyConfiguration config)
+        public IEnumerable<PackageResult> get_all_installed_packages(ChocolateyConfiguration config)
         {
             //todo : move to deep copy for get all installed
             //var listConfig = config.deep_copy();

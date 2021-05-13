@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -306,7 +306,8 @@ Chocolatey is not an official build (bypassed with --allow-unofficial).
  attempting to use Chocolatey in a non-administrator setting, you
  must select a different location other than the default install
  location. See
- https://chocolatey.org/install#non-administrative-install for details.
+ https://docs.chocolatey.org/en-us/choco/setup#non-administrative-install
+ for details.
 ");
                 var selection = InteractivePrompt.prompt_for_confirmation(@"
  Do you want to continue?", new[] { "yes", "no" },

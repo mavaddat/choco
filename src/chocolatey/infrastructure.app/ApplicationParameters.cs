@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,7 +89,7 @@ namespace chocolatey.infrastructure.app
         public static readonly string TemplatesLocation = _fileSystem.combine_paths(InstallLocation, "templates");
         public static readonly string ChocolateyCommunityFeedPushSourceOld = "https://chocolatey.org/";
         public static readonly string ChocolateyCommunityFeedPushSource = "https://push.chocolatey.org/";
-        public static readonly string ChocolateyCommunityFeedSource = "https://chocolatey.org/api/v2/";
+        public static readonly string ChocolateyCommunityFeedSource = "https://community.chocolatey.org/api/v2/";
         public static readonly string ChocolateyLicensedFeedSource = "https://licensedpackages.chocolatey.org/api/v2/";
         public static readonly string ChocolateyLicensedFeedSourceName = "chocolatey.licensed";
         public static readonly string UserAgent = "Chocolatey Command Line";

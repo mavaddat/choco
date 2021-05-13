@@ -1,4 +1,4 @@
-﻿// Copyright © 2017 - 2018 Chocolatey Software, Inc
+﻿// Copyright © 2017 - 2021 Chocolatey Software, Inc
 // Copyright © 2011 - 2017 RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ namespace chocolatey.infrastructure.app.configuration
             var item = (ConfigFileApiKeySetting) obj;
 
             return (Source == item.Source)
-                   && (Key == item.Source);
+                   && (Key == item.Key);
         }
 
         public override int GetHashCode()

@@ -1,4 +1,4 @@
-﻿# Copyright © 2017 Chocolatey Software, Inc.
+﻿# Copyright © 2017 - 2021 Chocolatey Software, Inc.
 # Copyright © 2015 - 2017 RealDimensions Software, LLC
 # Copyright © 2011 - 2015 RealDimensions Software, LLC & original authors/contributors from https://github.com/chocolatey/chocolatey
 #
@@ -30,10 +30,10 @@ environment variables, mainly when not expanding the variables is a
 must.
 
 .PARAMETER Name
-The environemnt variable you want to get the value from.
+The environment variable you want to get the value from.
 
 .PARAMETER Scope
-The environemnt variable target scope. This is `Process`, `User`, or
+The environment variable target scope. This is `Process`, `User`, or
 `Machine`.
 
 .PARAMETER PreserveVariables

@@ -1,4 +1,4 @@
-﻿# Copyright © 2017 Chocolatey Software, Inc.
+﻿# Copyright © 2017 - 2021 Chocolatey Software, Inc.
 # Copyright © 2015 - 2017 RealDimensions Software, LLC
 # Copyright © 2011 - 2015 RealDimensions Software, LLC & original authors/contributors from https://github.com/chocolatey/chocolatey
 #
@@ -49,7 +49,7 @@ As of v0.10.12, the directory will be created unless it contains environment
 variable expansion like `%AppData%\FooBar`.
 
 .PARAMETER Arguments
-OPTIONAL - Additonal arguments that should be passed along to the new
+OPTIONAL - Additional arguments that should be passed along to the new
 shortcut.
 
 .PARAMETER IconLocation
